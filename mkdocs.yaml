@@ -1,0 +1,16 @@
+site_name: Sample方式設計書
+extra:
+  generator: true
+plugins:
+  - search:
+theme:
+  locale: ja
+  name: material
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.snippets:
+      base_path: docs/
