@@ -3,6 +3,8 @@ extra:
   generator: true
 plugins:
   - search:
+  - print-site:
+      add_to_navigation: true
 theme:
   locale: ja
   name: material
