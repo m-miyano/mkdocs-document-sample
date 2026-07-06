@@ -1,0 +1,839 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../1.4.10_%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E9%96%93%E9%80%A3%E6%90%BA%E6%96%B9%E5%BC%8F/">
+      
+      
+        <link rel="next" href="../1.4.8_%E3%83%A2%E3%83%87%E3%83%AB%E7%AE%A1%E7%90%86%E3%83%BB%E3%83%A2%E3%83%87%E3%83%AB%E5%88%87%E6%9B%BF%E6%96%B9%E5%BC%8F/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>1.4.7 入出力方式・ガードレール等 - Sample方式設計書</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#147" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Sample方式設計書" class="md-header__button md-logo" aria-label="Sample方式設計書" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sample方式設計書
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1.4.7 入出力方式・ガードレール等
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sample方式設計書" class="md-nav__button md-logo" aria-label="Sample方式設計書" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sample方式設計書
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI処理方式
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI処理方式
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.4.10_%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E9%96%93%E9%80%A3%E6%90%BA%E6%96%B9%E5%BC%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.4.10 エージェント間連携方式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    1.4.7 入出力方式・ガードレール等
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    1.4.7 入出力方式・ガードレール等
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 入力処理パイプライン
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-pii" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. PII 検出対象と処理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. プロンプトインジェクション対策
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. プロンプトインジェクション対策">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      禁止フレーズパターン例
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 出力処理パイプライン
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. システムプロンプト設計原則
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-structured-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 入出力スキーマ（Structured Output）
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.4.8_%E3%83%A2%E3%83%87%E3%83%AB%E7%AE%A1%E7%90%86%E3%83%BB%E3%83%A2%E3%83%87%E3%83%AB%E5%88%87%E6%9B%BF%E6%96%B9%E5%BC%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.4.8 モデル管理・モデル切替方式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.4.9_%E3%83%84%E3%83%BC%E3%83%AB%E5%88%A9%E7%94%A8%E6%96%B9%E5%BC%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.4.9 ツール利用方式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    API処理方式
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            API処理方式
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../API%E5%87%A6%E7%90%86%E6%96%B9%E5%BC%8F/1.3.1_%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3%E6%96%B9%E9%87%9D/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.3.1 アーキテクチャ方針
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../API%E5%87%A6%E7%90%86%E6%96%B9%E5%BC%8F/1.3.2_%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3%E6%A7%8B%E6%88%90/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.3.2 アーキテクチャ構成（レイヤ、サービス、コンポーネント、モジュール等）
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../API%E5%87%A6%E7%90%86%E6%96%B9%E5%BC%8F/1.3.3_%E5%87%A6%E7%90%86%E6%96%B9%E5%BC%8F%E6%A6%82%E8%A6%81/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.3.3 処理方式概要
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 入力処理パイプライン
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-pii" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. PII 検出対象と処理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. プロンプトインジェクション対策
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. プロンプトインジェクション対策">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      禁止フレーズパターン例
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 出力処理パイプライン
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. システムプロンプト設計原則
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-structured-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 入出力スキーマ（Structured Output）
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="147">1.4.7 入出力方式・ガードレール等</h1>
+<hr />
+<h2 id="1">1. 入力処理パイプライン</h2>
+<pre class="mermaid"><code>flowchart LR
+    RAW[ユーザー入力\n / イベントデータ] --&gt; SANITIZE[サニタイズ\nHTMLエスケープ・特殊文字処理]
+    SANITIZE --&gt; PII[PII 検出・マスキング\nMicrosoft Presidio]
+    PII --&gt; PI[プロンプトインジェクション検知\nパターンマッチ + LLM分類]
+    PI --&gt;|注入検知| BLOCK[❌ 403 ブロック\n監査ログ記録]
+    PI --&gt;|正常| TOKEN_CHECK[トークン数計算\n上限チェック]
+    TOKEN_CHECK --&gt;|超過| TRUNCATE[チャンク分割 / 要約圧縮]
+    TOKEN_CHECK --&gt;|OK| ENRICH[コンテキスト付与\nシステムプロンプト結合]
+    TRUNCATE --&gt; ENRICH
+    ENRICH --&gt; LLM[LLM 呼び出し]</code></pre>
+<hr />
+<h2 id="2-pii">2. PII 検出対象と処理</h2>
+<table>
+<thead>
+<tr>
+<th>PII 種別</th>
+<th>検出方法</th>
+<th>処理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>氏名（日本語）</td>
+<td>Presidio + カスタム認識器</td>
+<td><code>[氏名]</code> に置換</td>
+</tr>
+<tr>
+<td>メールアドレス</td>
+<td>正規表現</td>
+<td><code>[MAIL]</code> に置換</td>
+</tr>
+<tr>
+<td>電話番号</td>
+<td>Presidio</td>
+<td><code>[TEL]</code> に置換</td>
+</tr>
+<tr>
+<td>IPアドレス（内部）</td>
+<td>正規表現（プライベートIP帯）</td>
+<td><code>[INTERNAL_IP]</code> に置換</td>
+</tr>
+<tr>
+<td>施設ID（機密指定）</td>
+<td>カスタム辞書</td>
+<td><code>[FACILITY]</code> に置換</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>外部の Azure OpenAI に送信する前に必ず適用する。匿名化ログはデバッグ用途で保持する。</p>
+</blockquote>
+<hr />
+<h2 id="3">3. プロンプトインジェクション対策</h2>
+<pre class="mermaid"><code>flowchart TD
+    INPUT[ユーザー入力] --&gt; PATTERN{パターン検知\n禁止フレーズ辞書}
+    PATTERN --&gt;|検知| BLOCK1[❌ ブロック]
+    PATTERN --&gt;|未検知| LLM_CLS[LLM分類器\n「この入力はシステムの意図から逸脱しているか？」]
+    LLM_CLS --&gt;|高リスク 0.8以上| BLOCK2[❌ ブロック + 管理者通知]
+    LLM_CLS --&gt;|中リスク 0.5-0.8| WARN[⚠️ 警告ログ + 制限モードで実行]
+    LLM_CLS --&gt;|低リスク| PASS[✅ 通過]</code></pre>
+<h3 id="_1">禁止フレーズパターン例</h3>
+<div class="highlight"><pre><span></span><code><span class="n">INJECTION_PATTERNS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="sa">r</span><span class="s2">&quot;ignore (all )?previous instructions?&quot;</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s2">&quot;あなたは.*ふりをしてください&quot;</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s2">&quot;システムプロンプトを.*教えて&quot;</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s2">&quot;DAN|jailbreak|越獄&quot;</span><span class="p">,</span>
+    <span class="sa">r</span><span class="s2">&quot;&lt;\|.*\|&gt;&quot;</span><span class="p">,</span>  <span class="c1"># 特殊トークン挿入</span>
+<span class="p">]</span>
+</code></pre></div>
+<hr />
+<h2 id="4">4. 出力処理パイプライン</h2>
+<pre class="mermaid"><code>flowchart LR
+    LLM_OUT[LLM 出力] --&gt; HARM[有害コンテンツ検出\nAzure Content Safety]
+    HARM --&gt;|検出| BLOCK[❌ 出力ブロック\n代替メッセージ返却]
+    HARM --&gt;|クリア| CONF[機密情報チェック\n施設ID・IP等の漏洩確認]
+    CONF --&gt;|検出| REDACT[🔒 自動リダクション]
+    CONF --&gt;|クリア| FORMAT[フォーマット変換\nMarkdown構造バリデーション]
+    REDACT --&gt; FORMAT
+    FORMAT --&gt; CITE[引用リンク付与\n参照ドキュメントを脚注に追加]
+    CITE --&gt; STREAM[ストリーミング配信 / 一括返却]</code></pre>
+<hr />
+<h2 id="5">5. システムプロンプト設計原則</h2>
+<table>
+<thead>
+<tr>
+<th>原則</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>役割の明確化</strong></td>
+<td>「あなたはオペレーションセンターの AI 支援システムです」と明示</td>
+</tr>
+<tr>
+<td><strong>スコープ制限</strong></td>
+<td>OC-IMS 業務以外の質問には回答しないよう指示</td>
+</tr>
+<tr>
+<td><strong>根拠提示の義務化</strong></td>
+<td>提案には必ず参照した情報源を示すよう指示</td>
+</tr>
+<tr>
+<td><strong>不確実性の表明</strong></td>
+<td>確信度が低い場合は「確認が必要です」と明示するよう指示</td>
+</tr>
+<tr>
+<td><strong>人間への委譲</strong></td>
+<td>最終判断はオペレーターが行うことを常に明記</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-structured-output">6. 入出力スキーマ（Structured Output）</h2>
+<p>エージェントの出力は Pydantic モデルで構造化し、型安全性を保証する。</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">IncidentAnalysisOutput</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">priority</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+    <span class="n">priority_reason</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+    <span class="n">root_cause_candidates</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">max_items</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">recommended_actions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ActionItem</span><span class="p">]</span>
+    <span class="n">confidence</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="n">ge</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">citations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Citation</span><span class="p">]</span>
+    <span class="n">disclaimer</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1"># 「AIによる提案です。最終判断はオペレーターが行ってください」固定文言</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>

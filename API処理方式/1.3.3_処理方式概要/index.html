@@ -1,0 +1,901 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../1.3.2_%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3%E6%A7%8B%E6%88%90/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>1.3.3 処理方式概要 - Sample方式設計書</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#133" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Sample方式設計書" class="md-header__button md-logo" aria-label="Sample方式設計書" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sample方式設計書
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1.3.3 処理方式概要
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sample方式設計書" class="md-nav__button md-logo" aria-label="Sample方式設計書" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sample方式設計書
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI処理方式
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI処理方式
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AI%E5%87%A6%E7%90%86%E6%96%B9%E5%BC%8F/1.4.10_%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E9%96%93%E9%80%A3%E6%90%BA%E6%96%B9%E5%BC%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.4.10 エージェント間連携方式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AI%E5%87%A6%E7%90%86%E6%96%B9%E5%BC%8F/1.4.7_%E5%85%A5%E5%87%BA%E5%8A%9B%E6%96%B9%E5%BC%8F%E3%83%BB%E3%82%AC%E3%83%BC%E3%83%89%E3%83%AC%E3%83%BC%E3%83%AB%E7%AD%89/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.4.7 入出力方式・ガードレール等
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AI%E5%87%A6%E7%90%86%E6%96%B9%E5%BC%8F/1.4.8_%E3%83%A2%E3%83%87%E3%83%AB%E7%AE%A1%E7%90%86%E3%83%BB%E3%83%A2%E3%83%87%E3%83%AB%E5%88%87%E6%9B%BF%E6%96%B9%E5%BC%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.4.8 モデル管理・モデル切替方式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AI%E5%87%A6%E7%90%86%E6%96%B9%E5%BC%8F/1.4.9_%E3%83%84%E3%83%BC%E3%83%AB%E5%88%A9%E7%94%A8%E6%96%B9%E5%BC%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.4.9 ツール利用方式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    API処理方式
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            API処理方式
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.3.1_%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3%E6%96%B9%E9%87%9D/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.3.1 アーキテクチャ方針
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.3.2_%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3%E6%A7%8B%E6%88%90/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.3.2 アーキテクチャ構成（レイヤ、サービス、コンポーネント、モジュール等）
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    1.3.3 処理方式概要
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    1.3.3 処理方式概要
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. リクエスト処理フロー（同期）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. リクエスト処理フロー（同期）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      処理ステップ詳細
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 非同期処理フロー（センサーデータ取り込み）
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. キャッシュ戦略
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 大量データのページネーション方式
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 大量データのページネーション方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cursor-based-pagination" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cursor-based Pagination（推奨）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-websocket" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. WebSocket によるリアルタイム配信
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. リクエスト処理フロー（同期）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. リクエスト処理フロー（同期）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      処理ステップ詳細
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 非同期処理フロー（センサーデータ取り込み）
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. キャッシュ戦略
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 大量データのページネーション方式
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 大量データのページネーション方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cursor-based-pagination" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cursor-based Pagination（推奨）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-websocket" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. WebSocket によるリアルタイム配信
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="133">1.3.3 処理方式概要</h1>
+<hr />
+<h2 id="1">1. リクエスト処理フロー（同期）</h2>
+<pre class="mermaid"><code>flowchart LR
+    CLIENT[クライアント] --&gt;|HTTPS| GW[Kong Gateway]
+    GW --&gt;|JWT検証\nレート制限| SVC[API Service]
+    SVC --&gt;|バリデーション| BIZ[ビジネスロジック]
+    BIZ --&gt;|読み取り| CACHE[(Redis Cache)]
+    CACHE --&gt;|キャッシュミス| DB[(PostgreSQL)]
+    DB --&gt; CACHE
+    CACHE --&gt; BIZ
+    BIZ --&gt; SVC
+    SVC --&gt;|JSON| GW
+    GW --&gt; CLIENT</code></pre>
+<h3 id="_1">処理ステップ詳細</h3>
+<table>
+<thead>
+<tr>
+<th>ステップ</th>
+<th>処理内容</th>
+<th>担当コンポーネント</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>① 受信</td>
+<td>TLS 終端・リクエスト受付</td>
+<td>Kong Gateway</td>
+</tr>
+<tr>
+<td>② 認証</td>
+<td>JWT 署名検証・有効期限確認</td>
+<td>Kong JWT Plugin</td>
+</tr>
+<tr>
+<td>③ レート制限</td>
+<td>クライアント単位のスロットリング</td>
+<td>Kong Rate-Limiting Plugin</td>
+</tr>
+<tr>
+<td>④ ルーティング</td>
+<td>サービスへのプロキシ</td>
+<td>Kong</td>
+</tr>
+<tr>
+<td>⑤ 入力検証</td>
+<td>Pydantic スキーマバリデーション</td>
+<td>API Controller</td>
+</tr>
+<tr>
+<td>⑥ 認可</td>
+<td>RBAC 権限チェック</td>
+<td>Application Service</td>
+</tr>
+<tr>
+<td>⑦ ビジネス処理</td>
+<td>ドメインロジック実行</td>
+<td>Domain Service</td>
+</tr>
+<tr>
+<td>⑧ データアクセス</td>
+<td>DB / キャッシュ読み書き</td>
+<td>Repository</td>
+</tr>
+<tr>
+<td>⑨ レスポンス整形</td>
+<td>JSON シリアライズ</td>
+<td>API Controller</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2">2. 非同期処理フロー（センサーデータ取り込み）</h2>
+<pre class="mermaid"><code>sequenceDiagram
+    participant SENSOR as センサー群
+    participant MQTT as MQTT Broker
+    participant INGEST as Ingest Worker
+    participant KAFKA as Kafka
+    participant PROC as Processor Worker
+    participant DB as PostgreSQL
+    participant ALERT as Alert Engine
+
+    SENSOR-&gt;&gt;MQTT: センサーデータ送信（1秒間隔）
+    MQTT-&gt;&gt;INGEST: メッセージ配信
+    INGEST-&gt;&gt;INGEST: データ正規化・型変換
+    INGEST-&gt;&gt;KAFKA: topic: raw-metrics
+
+    par 並列処理
+        KAFKA-&gt;&gt;PROC: メトリクス保存ワーカー
+        PROC-&gt;&gt;DB: バッチ INSERT（100件ごと）
+    and
+        KAFKA-&gt;&gt;ALERT: アラート評価ワーカー
+        ALERT-&gt;&gt;ALERT: 閾値チェック
+        ALERT-&gt;&gt;KAFKA: topic: alerts（異常時のみ）
+    end</code></pre>
+<hr />
+<h2 id="3">3. キャッシュ戦略</h2>
+<table>
+<thead>
+<tr>
+<th>データ種別</th>
+<th>キャッシュ戦略</th>
+<th>TTL</th>
+<th>更新タイミング</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ダッシュボード集計値</td>
+<td>Read-Through</td>
+<td>30秒</td>
+<td>30秒ごとの定期更新</td>
+</tr>
+<tr>
+<td>閾値設定マスタ</td>
+<td>Cache-Aside</td>
+<td>10分</td>
+<td>設定変更時に即時無効化</td>
+</tr>
+<tr>
+<td>ユーザー権限情報</td>
+<td>Cache-Aside</td>
+<td>5分</td>
+<td>ログイン時・権限変更時</td>
+</tr>
+<tr>
+<td>アクティブアラート</td>
+<td>Write-Through</td>
+<td>1時間</td>
+<td>アラート起票・解除時</td>
+</tr>
+<tr>
+<td>センサー最新値</td>
+<td>Write-Through</td>
+<td>10秒</td>
+<td>センサーデータ受信時</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4">4. 大量データのページネーション方式</h2>
+<h3 id="cursor-based-pagination">Cursor-based Pagination（推奨）</h3>
+<p>時系列データや大量レコードの取得にはカーソルベースを採用する。</p>
+<p><strong>リクエスト例</strong>
+<div class="highlight"><pre><span></span><code><span class="err">GET /api/v1/metrics?limit=100&amp;cursor=eyJpZCI6MTAwMH0=</span>
+</code></pre></div></p>
+<p><strong>レスポンス例</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;pagination&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;limit&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;next_cursor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;eyJpZCI6MTEwMH0=&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;has_more&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<blockquote>
+<p>オフセットベースページネーションはデータ挿入によるズレが発生するため、リアルタイム監視データには使用しない。</p>
+</blockquote>
+<hr />
+<h2 id="5-websocket">5. WebSocket によるリアルタイム配信</h2>
+<p>ダッシュボードへのリアルタイムデータ配信には WebSocket を採用する。</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant UI as ダッシュボード
+    participant WS as WebSocket Server
+    participant KAFKA as Kafka
+    participant ALERT as Alert Engine
+
+    UI-&gt;&gt;WS: WebSocket 接続 (ws://oc-ims/ws/dashboard)
+    WS--&gt;&gt;UI: 接続確立
+
+    loop リアルタイム配信
+        KAFKA-&gt;&gt;WS: メトリクスイベント
+        WS-&gt;&gt;UI: push { type: "metric", data: {...} }
+    end
+
+    ALERT-&gt;&gt;KAFKA: アラートイベント
+    KAFKA-&gt;&gt;WS: アラートメッセージ
+    WS-&gt;&gt;UI: push { type: "alert", severity: "critical", ... }</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>

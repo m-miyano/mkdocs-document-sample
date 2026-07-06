@@ -1,0 +1,1764 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../1.4.7_%E5%85%A5%E5%87%BA%E5%8A%9B%E6%96%B9%E5%BC%8F%E3%83%BB%E3%82%AC%E3%83%BC%E3%83%89%E3%83%AC%E3%83%BC%E3%83%AB%E7%AD%89/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>1.4.10 エージェント間連携方式 - Sample方式設計書</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1410" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Sample方式設計書" class="md-header__button md-logo" aria-label="Sample方式設計書" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sample方式設計書
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1.4.10 エージェント間連携方式
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Sample方式設計書" class="md-nav__button md-logo" aria-label="Sample方式設計書" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sample方式設計書
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI処理方式
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI処理方式
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    1.4.10 エージェント間連携方式
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    1.4.10 エージェント間連携方式
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      目次
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 概要
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 連携アーキテクチャ全体像
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. エージェント種別と役割
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. エージェント種別と役割">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      エージェント責務の詳細
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 連携パターン
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 連携パターン">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 オーケストレーター型
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 コレオグラフィー型（イベント駆動）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 コレオグラフィー型（イベント駆動）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      イベントスキーマ定義
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 ピアツーピア型
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. メッセージプロトコル
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. メッセージプロトコル">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      メッセージ構造
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      メッセージタイプ詳細
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. コンテキスト共有方式
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. コンテキスト共有方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      コンテキストキー命名規則
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. エラーハンドリング・リトライ方式
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. エラーハンドリング・リトライ方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      リトライポリシー
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. 制御フロー詳細シーケンス
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. 状態管理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. 非機能要件対応
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. 非機能要件対応">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      パフォーマンス要件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      可観測性
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="可観測性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      必須の計装ポイント
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      セキュリティ
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.4.7_%E5%85%A5%E5%87%BA%E5%8A%9B%E6%96%B9%E5%BC%8F%E3%83%BB%E3%82%AC%E3%83%BC%E3%83%89%E3%83%AC%E3%83%BC%E3%83%AB%E7%AD%89/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.4.7 入出力方式・ガードレール等
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.4.8_%E3%83%A2%E3%83%87%E3%83%AB%E7%AE%A1%E7%90%86%E3%83%BB%E3%83%A2%E3%83%87%E3%83%AB%E5%88%87%E6%9B%BF%E6%96%B9%E5%BC%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.4.8 モデル管理・モデル切替方式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.4.9_%E3%83%84%E3%83%BC%E3%83%AB%E5%88%A9%E7%94%A8%E6%96%B9%E5%BC%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.4.9 ツール利用方式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    API処理方式
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            API処理方式
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../API%E5%87%A6%E7%90%86%E6%96%B9%E5%BC%8F/1.3.1_%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3%E6%96%B9%E9%87%9D/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.3.1 アーキテクチャ方針
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../API%E5%87%A6%E7%90%86%E6%96%B9%E5%BC%8F/1.3.2_%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3%E6%A7%8B%E6%88%90/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.3.2 アーキテクチャ構成（レイヤ、サービス、コンポーネント、モジュール等）
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../API%E5%87%A6%E7%90%86%E6%96%B9%E5%BC%8F/1.3.3_%E5%87%A6%E7%90%86%E6%96%B9%E5%BC%8F%E6%A6%82%E8%A6%81/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.3.3 処理方式概要
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      目次
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 概要
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 連携アーキテクチャ全体像
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. エージェント種別と役割
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. エージェント種別と役割">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      エージェント責務の詳細
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 連携パターン
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 連携パターン">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 オーケストレーター型
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 コレオグラフィー型（イベント駆動）
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 コレオグラフィー型（イベント駆動）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      イベントスキーマ定義
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 ピアツーピア型
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. メッセージプロトコル
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. メッセージプロトコル">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      メッセージ構造
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      メッセージタイプ詳細
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. コンテキスト共有方式
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. コンテキスト共有方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      コンテキストキー命名規則
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. エラーハンドリング・リトライ方式
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. エラーハンドリング・リトライ方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      リトライポリシー
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. 制御フロー詳細シーケンス
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. 状態管理
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. 非機能要件対応
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. 非機能要件対応">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      パフォーマンス要件
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      可観測性
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="可観測性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      必須の計装ポイント
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      セキュリティ
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="1410">1.4.10 エージェント間連携方式</h1>
+<hr />
+<h2 id="_1">目次</h2>
+<ul>
+<li><a href="#1-概要">1. 概要</a></li>
+<li><a href="#2-連携アーキテクチャ全体像">2. 連携アーキテクチャ全体像</a></li>
+<li><a href="#3-エージェント種別と役割">3. エージェント種別と役割</a></li>
+<li><a href="#4-連携パターン">4. 連携パターン</a></li>
+<li><a href="#41-オーケストレーター型">4.1 オーケストレーター型</a></li>
+<li><a href="#42-コレオグラフィー型イベント駆動">4.2 コレオグラフィー型（イベント駆動）</a></li>
+<li><a href="#43-ピアツーピア型">4.3 ピアツーピア型</a></li>
+<li><a href="#5-メッセージプロトコル">5. メッセージプロトコル</a></li>
+<li><a href="#6-コンテキスト共有方式">6. コンテキスト共有方式</a></li>
+<li><a href="#7-エラーハンドリングリトライ方式">7. エラーハンドリング・リトライ方式</a></li>
+<li><a href="#8-制御フロー詳細シーケンス">8. 制御フロー詳細シーケンス</a></li>
+<li><a href="#9-状態管理">9. 状態管理</a></li>
+<li><a href="#10-非機能要件対応">10. 非機能要件対応</a></li>
+</ul>
+<hr />
+<h2 id="1">1. 概要</h2>
+<p>本章では、マルチエージェントシステムにおけるエージェント間の連携方式について定義する。
+各エージェントは独立したLLMコンテキストと専門的な役割を持ち、協調して複雑なタスクを達成する。</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>対象システム</strong></td>
+<td>AIアシスタント基盤（マルチエージェント構成）</td>
+</tr>
+<tr>
+<td><strong>連携方式</strong></td>
+<td>オーケストレーター型 ＋ イベント駆動型の複合構成</td>
+</tr>
+<tr>
+<td><strong>通信プロトコル</strong></td>
+<td>内部バス（同期）/ メッセージキュー（非同期）</td>
+</tr>
+<tr>
+<td><strong>コンテキスト共有</strong></td>
+<td>共有メモリ（Redis） + エージェント固有メモリ</td>
+</tr>
+<tr>
+<td><strong>採用フレームワーク</strong></td>
+<td>LangGraph / AutoGen（用途に応じて使い分け）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2">2. 連携アーキテクチャ全体像</h2>
+<pre class="mermaid"><code>graph TB
+    subgraph USER["👤 ユーザーインターフェース層"]
+        UI[Webフロントエンド]
+        API[API Gateway]
+    end
+
+    subgraph ORCH["🎼 オーケストレーター層"]
+        OA[Orchestrator Agent&lt;br/&gt;タスク分解・ルーティング]
+    end
+
+    subgraph AGENTS["🤖 専門エージェント層"]
+        direction LR
+        SA[Search Agent&lt;br/&gt;情報検索]
+        CA[Coder Agent&lt;br/&gt;コード生成・実行]
+        DA[Data Agent&lt;br/&gt;データ分析]
+        RA[Review Agent&lt;br/&gt;品質レビュー]
+        WA[Writer Agent&lt;br/&gt;文書生成]
+    end
+
+    subgraph INFRA["🗄️ 共有インフラ層"]
+        direction LR
+        SM[Shared Memory&lt;br/&gt;Redis]
+        VDB[Vector DB&lt;br/&gt;Qdrant]
+        MQ[Message Queue&lt;br/&gt;RabbitMQ]
+        TS[Tool Server&lt;br/&gt;MCP]
+    end
+
+    UI --&gt; API --&gt; OA
+    OA --&gt;|タスク委譲| SA
+    OA --&gt;|タスク委譲| CA
+    OA --&gt;|タスク委譲| DA
+    OA --&gt;|レビュー依頼| RA
+    OA --&gt;|文書化依頼| WA
+
+    SA &lt;--&gt;|コンテキスト読書き| SM
+    CA &lt;--&gt;|コンテキスト読書き| SM
+    DA &lt;--&gt;|コンテキスト読書き| SM
+    RA &lt;--&gt;|コンテキスト読書き| SM
+    WA &lt;--&gt;|コンテキスト読書き| SM
+
+    SA --&gt; VDB
+    DA --&gt; VDB
+    SA --&gt; TS
+    CA --&gt; TS
+
+    OA --&gt;|非同期タスク| MQ
+    MQ --&gt;|ワーカー起動| CA
+    MQ --&gt;|ワーカー起動| DA
+
+    style USER fill:#e3f2fd,stroke:#1565c0
+    style ORCH fill:#fce4ec,stroke:#880e4f
+    style AGENTS fill:#e8f5e9,stroke:#1b5e20
+    style INFRA fill:#fff8e1,stroke:#e65100</code></pre>
+<hr />
+<h2 id="3">3. エージェント種別と役割</h2>
+<table>
+<thead>
+<tr>
+<th>エージェント名</th>
+<th>略称</th>
+<th>主な役割</th>
+<th>使用LLM</th>
+<th>連携先</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Orchestrator Agent</td>
+<td>OA</td>
+<td>タスク分解・委譲・結果集約</td>
+<td>GPT-4o</td>
+<td>全エージェント</td>
+</tr>
+<tr>
+<td>Search Agent</td>
+<td>SA</td>
+<td>Web/DB/社内文書検索</td>
+<td>GPT-4o-mini</td>
+<td>DA, WA</td>
+</tr>
+<tr>
+<td>Coder Agent</td>
+<td>CA</td>
+<td>コード生成・実行・デバッグ</td>
+<td>Claude 3.5 Sonnet</td>
+<td>RA, DA</td>
+</tr>
+<tr>
+<td>Data Agent</td>
+<td>DA</td>
+<td>データ処理・統計・可視化</td>
+<td>GPT-4o</td>
+<td>WA, RA</td>
+</tr>
+<tr>
+<td>Review Agent</td>
+<td>RA</td>
+<td>成果物の品質レビュー・修正提案</td>
+<td>GPT-4o</td>
+<td>OA（フィードバック）</td>
+</tr>
+<tr>
+<td>Writer Agent</td>
+<td>WA</td>
+<td>レポート・ドキュメント生成</td>
+<td>Claude 3.5 Sonnet</td>
+<td>OA（最終成果物）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_2">エージェント責務の詳細</h3>
+<ul>
+<li><strong>Orchestrator Agent</strong></li>
+<li>ユーザーリクエストを受け取り、サブタスクへ分解（Task Decomposition）</li>
+<li>依存関係を解析し、実行順序を決定（DAG構築）</li>
+<li>
+<p>各エージェントの結果を収集・統合し、最終回答を生成</p>
+</li>
+<li>
+<p><strong>Search Agent</strong></p>
+</li>
+<li>RAGパイプラインを通じた関連ドキュメント取得</li>
+<li>Web検索ツール（Bing API / Tavily）の呼び出し</li>
+<li>
+<p>検索結果のスコアリングと要約</p>
+</li>
+<li>
+<p><strong>Coder Agent</strong></p>
+</li>
+<li>コードインタープリター（Python Sandbox）による安全な実行</li>
+<li>テスト生成・実行によるコード検証</li>
+<li>実行結果をStructured Outputとして返却</li>
+</ul>
+<hr />
+<h2 id="4">4. 連携パターン</h2>
+<h3 id="41">4.1 オーケストレーター型</h3>
+<p>中央集権的に OA がすべての制御を担うパターン。複雑なワークフローに適する。</p>
+<pre class="mermaid"><code>sequenceDiagram
+    actor User
+    participant OA as 🎼 Orchestrator
+    participant SA as 🔍 Search Agent
+    participant CA as 💻 Coder Agent
+    participant RA as 🔎 Review Agent
+
+    User-&gt;&gt;+OA: 「Pythonでデータ分析スクリプトを書いて」
+    OA-&gt;&gt;OA: タスク分解&lt;br/&gt;① 要件整理 → ② コード生成 → ③ レビュー
+
+    OA-&gt;&gt;+SA: 関連ライブラリ・ベストプラクティスを検索
+    SA--&gt;&gt;-OA: 検索結果（pandas, matplotlib, scikit-learn等）
+
+    OA-&gt;&gt;+CA: [検索結果を添付] コード生成指示
+    CA-&gt;&gt;CA: コード生成 &amp; Sandbox実行
+    CA--&gt;&gt;-OA: 生成コード + 実行結果
+
+    OA-&gt;&gt;+RA: [コード] レビュー依頼
+    RA--&gt;&gt;-OA: レビュー結果（LGTM / 修正コメント）
+
+    alt レビューOK
+        OA--&gt;&gt;User: 最終コード + 説明
+    else 修正が必要
+        OA-&gt;&gt;CA: 修正指示（再帰呼び出し）
+    end</code></pre>
+<hr />
+<h3 id="42">4.2 コレオグラフィー型（イベント駆動）</h3>
+<p>エージェントがイベントを購読し、自律的に連鎖するパターン。疎結合・スケーラブル。</p>
+<pre class="mermaid"><code>graph LR
+    subgraph MQ["📨 Message Queue (RabbitMQ)"]
+        direction TB
+        T1([task.search.requested])
+        T2([task.code.requested])
+        T3([task.review.requested])
+        T4([task.complete])
+    end
+
+    OA[🎼 Orchestrator] --&gt;|publish| T1
+    T1 --&gt;|subscribe| SA[🔍 Search Agent]
+    SA --&gt;|publish| T2
+    T2 --&gt;|subscribe| CA[💻 Coder Agent]
+    CA --&gt;|publish| T3
+    T3 --&gt;|subscribe| RA[🔎 Review Agent]
+    RA --&gt;|publish| T4
+    T4 --&gt;|subscribe| OA
+
+    style MQ fill:#fff3e0,stroke:#e65100</code></pre>
+<h4 id="_3">イベントスキーマ定義</h4>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;event_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid-v4&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;event_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task.code.requested&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;source_agent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;orchestrator&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;target_agent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;coder&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-07-03T10:00:00Z&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;correlation_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;session-uuid&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;task_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;task-001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;instruction&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;データ分析スクリプトを生成してください&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;context_keys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;search_result_001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;user_requirements&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;priority&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;normal&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;timeout_sec&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h3 id="43">4.3 ピアツーピア型</h3>
+<p>特定のエージェントペアが直接通信するパターン。低レイテンシが求められる場面で使用。</p>
+<pre class="mermaid"><code>graph TD
+    CA[💻 Coder Agent] &lt;--&gt;|直接RPC| RA[🔎 Review Agent]
+    CA --&gt;|修正依頼| CA
+    RA --&gt;|承認| Done([✅ 完了])
+
+    style Done fill:#c8e6c9,stroke:#388e3c</code></pre>
+<hr />
+<h2 id="5">5. メッセージプロトコル</h2>
+<p>エージェント間のメッセージは統一フォーマットで送受信する。</p>
+<h3 id="_4">メッセージ構造</h3>
+<table>
+<thead>
+<tr>
+<th>フィールド</th>
+<th>型</th>
+<th>必須</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>message_id</code></td>
+<td>UUID</td>
+<td>✅</td>
+<td>メッセージ一意識別子</td>
+</tr>
+<tr>
+<td><code>correlation_id</code></td>
+<td>UUID</td>
+<td>✅</td>
+<td>セッション・タスクの追跡用ID</td>
+</tr>
+<tr>
+<td><code>sender</code></td>
+<td>string</td>
+<td>✅</td>
+<td>送信エージェントID</td>
+</tr>
+<tr>
+<td><code>receiver</code></td>
+<td>string</td>
+<td>✅</td>
+<td>受信エージェントID（<code>broadcast</code>も可）</td>
+</tr>
+<tr>
+<td><code>message_type</code></td>
+<td>enum</td>
+<td>✅</td>
+<td><code>request</code> / <code>response</code> / <code>event</code> / <code>error</code></td>
+</tr>
+<tr>
+<td><code>priority</code></td>
+<td>enum</td>
+<td>✅</td>
+<td><code>high</code> / <code>normal</code> / <code>low</code></td>
+</tr>
+<tr>
+<td><code>payload</code></td>
+<td>object</td>
+<td>✅</td>
+<td>メッセージ本文（タスク依存）</td>
+</tr>
+<tr>
+<td><code>context_refs</code></td>
+<td>array</td>
+<td>-</td>
+<td>参照する共有メモリのキー一覧</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>ISO8601</td>
+<td>✅</td>
+<td>送信日時</td>
+</tr>
+<tr>
+<td><code>expires_at</code></td>
+<td>ISO8601</td>
+<td>-</td>
+<td>メッセージ有効期限</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_5">メッセージタイプ詳細</h3>
+<table>
+<thead>
+<tr>
+<th>タイプ</th>
+<th>通信方式</th>
+<th>用途</th>
+<th>応答要否</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>request</code></td>
+<td>同期 / 非同期</td>
+<td>タスク委譲・ツール呼び出し要求</td>
+<td>✅ 必要</td>
+</tr>
+<tr>
+<td><code>response</code></td>
+<td>同期 / 非同期</td>
+<td>requestへの応答・成果物返却</td>
+<td>❌ 不要</td>
+</tr>
+<tr>
+<td><code>event</code></td>
+<td>非同期（Pub/Sub）</td>
+<td>状態変化の通知</td>
+<td>❌ 不要</td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td>同期 / 非同期</td>
+<td>エラー・例外の通知</td>
+<td>❌ 不要</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6">6. コンテキスト共有方式</h2>
+<p>エージェントは独立したLLMコンテキストを持つため、情報共有は外部ストアを経由する。</p>
+<pre class="mermaid"><code>graph LR
+    subgraph AGENTS["エージェント群"]
+        OA[🎼 OA]
+        SA[🔍 SA]
+        CA[💻 CA]
+    end
+
+    subgraph SHARED["共有ストア"]
+        direction TB
+        SM["🔴 Redis&lt;br/&gt;(短期・揮発性)&lt;br/&gt;TTL: 1時間"]
+        DB["🟢 PostgreSQL&lt;br/&gt;(長期・永続)&lt;br/&gt;セッション跨ぎ保存"]
+        VDB["🔵 Qdrant&lt;br/&gt;(ベクトル検索)&lt;br/&gt;RAGコンテキスト"]
+    end
+
+    OA &lt;--&gt;|read/write| SM
+    SA &lt;--&gt;|read/write| SM
+    CA &lt;--&gt;|read/write| SM
+    OA --&gt;|永続化| DB
+    SA --&gt;|永続化| DB
+    SM --&gt;|フラッシュ| DB
+    SA &lt;--&gt;|検索| VDB</code></pre>
+<h3 id="_6">コンテキストキー命名規則</h3>
+<div class="highlight"><pre><span></span><code>{session_id}:{task_id}:{agent_id}:{data_type}
+
+例）
+sess-abc123:task-001:search-agent:search_results
+sess-abc123:task-001:coder-agent:generated_code
+sess-abc123:task-001:orchestrator:task_plan
+</code></pre></div>
+<hr />
+<h2 id="7">7. エラーハンドリング・リトライ方式</h2>
+<pre class="mermaid"><code>flowchart TD
+    START([エージェント呼び出し]) --&gt; EXEC[タスク実行]
+    EXEC --&gt; CHECK{成功？}
+    CHECK --&gt;|Yes| SUCCESS([✅ 結果返却])
+    CHECK --&gt;|No| CLASSIFY{エラー種別}
+
+    CLASSIFY --&gt;|タイムアウト| RETRY{リトライ回数\n&lt; MAX？}
+    CLASSIFY --&gt;|モデルエラー| FALLBACK[フォールバック\nモデルに切替]
+    CLASSIFY --&gt;|ツールエラー| TOOLFIX[ツール再試行\n or 代替ツール]
+    CLASSIFY --&gt;|致命的エラー| ESCALATE[🆙 Orchestratorへ\nエスカレーション]
+
+    RETRY --&gt;|Yes| WAIT[指数バックオフ待機\n1s → 2s → 4s] --&gt; EXEC
+    RETRY --&gt;|No| ESCALATE
+
+    FALLBACK --&gt; EXEC
+    TOOLFIX --&gt; EXEC
+    ESCALATE --&gt; DEGRADED[縮退運転 or\nユーザーへ通知]
+
+    style SUCCESS fill:#c8e6c9,stroke:#388e3c
+    style ESCALATE fill:#ffcdd2,stroke:#c62828
+    style DEGRADED fill:#fff9c4,stroke:#f57f17</code></pre>
+<h3 id="_7">リトライポリシー</h3>
+<table>
+<thead>
+<tr>
+<th>エラー種別</th>
+<th>リトライ</th>
+<th>最大回数</th>
+<th>バックオフ</th>
+<th>フォールバック</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ネットワークタイムアウト</td>
+<td>✅</td>
+<td>3回</td>
+<td>指数（1s, 2s, 4s）</td>
+<td>-</td>
+</tr>
+<tr>
+<td>LLMレート制限（429）</td>
+<td>✅</td>
+<td>5回</td>
+<td>指数 + Jitter</td>
+<td>別エンドポイント</td>
+</tr>
+<tr>
+<td>LLMモデルエラー（5xx）</td>
+<td>✅</td>
+<td>2回</td>
+<td>固定（2s）</td>
+<td>フォールバックモデル</td>
+</tr>
+<tr>
+<td>入力バリデーションエラー</td>
+<td>❌</td>
+<td>-</td>
+<td>-</td>
+<td>Orchestratorへ通知</td>
+</tr>
+<tr>
+<td>コンテキスト長超過</td>
+<td>❌</td>
+<td>-</td>
+<td>-</td>
+<td>チャンク分割して再実行</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="8">8. 制御フロー詳細シーケンス</h2>
+<p>複合タスク（「競合他社の最新動向を調査してレポートを作成せよ」）の完全な実行フロー。</p>
+<pre class="mermaid"><code>sequenceDiagram
+    actor User
+    participant OA as 🎼 Orchestrator
+    participant SM as 🔴 Redis
+    participant SA as 🔍 Search Agent
+    participant DA as 📊 Data Agent
+    participant WA as ✍️ Writer Agent
+    participant RA as 🔎 Review Agent
+
+    User-&gt;&gt;+OA: 「競合他社の最新動向を調査してレポートを作成して」
+
+    rect rgb(232, 245, 233)
+        Note over OA: Phase 1: タスク分解
+        OA-&gt;&gt;OA: タスクをDAGに変換
+        OA-&gt;&gt;SM: タスクプランを保存&lt;br/&gt;key: sess-xxx:task_plan
+    end
+
+    rect rgb(227, 242, 253)
+        Note over SA: Phase 2: 情報収集（並列）
+        par 並列実行
+            OA-&gt;&gt;+SA: Web検索依頼（競合A）
+            SA--&gt;&gt;-OA: 検索結果A
+        and
+            OA-&gt;&gt;+SA: Web検索依頼（競合B）
+            SA--&gt;&gt;-OA: 検索結果B
+        end
+        OA-&gt;&gt;SM: 検索結果を保存
+    end
+
+    rect rgb(255, 243, 224)
+        Note over DA: Phase 3: データ分析
+        OA-&gt;&gt;+DA: [検索結果参照] 比較分析依頼
+        DA-&gt;&gt;SM: 検索結果を読み込み
+        DA-&gt;&gt;DA: 比較表・グラフ生成
+        DA-&gt;&gt;SM: 分析結果を保存
+        DA--&gt;&gt;-OA: 分析完了通知
+    end
+
+    rect rgb(252, 228, 236)
+        Note over WA,RA: Phase 4: 文書生成 &amp; レビュー
+        OA-&gt;&gt;+WA: [全結果参照] レポート作成依頼
+        WA-&gt;&gt;SM: コンテキスト一括読み込み
+        WA-&gt;&gt;WA: Markdownレポート生成
+        WA--&gt;&gt;-OA: 草稿レポート
+
+        OA-&gt;&gt;+RA: レビュー依頼
+        RA--&gt;&gt;-OA: レビュー結果（修正2点）
+
+        OA-&gt;&gt;+WA: 修正指示
+        WA--&gt;&gt;-OA: 最終レポート
+    end
+
+    OA--&gt;&gt;-User: 最終レポートを返却</code></pre>
+<hr />
+<h2 id="9">9. 状態管理</h2>
+<p>各タスクの実行状態はステートマシンで管理する。</p>
+<pre class="mermaid"><code>stateDiagram-v2
+    [*] --&gt; PENDING : タスク受付
+
+    PENDING --&gt; RUNNING : エージェント割り当て完了
+    PENDING --&gt; CANCELLED : タイムアウト / キャンセル要求
+
+    RUNNING --&gt; WAITING_DEPENDENCY : 依存タスク未完了
+    WAITING_DEPENDENCY --&gt; RUNNING : 依存タスク完了
+
+    RUNNING --&gt; REVIEWING : レビュー待ち
+    REVIEWING --&gt; RUNNING : 修正依頼（フィードバックループ）
+    REVIEWING --&gt; COMPLETED : レビュー承認
+
+    RUNNING --&gt; FAILED : エラー（リトライ上限超過）
+    FAILED --&gt; RUNNING : 手動リトライ / 縮退実行
+
+    COMPLETED --&gt; [*]
+    CANCELLED --&gt; [*]
+    FAILED --&gt; [*]
+
+    note right of RUNNING
+        最大実行時間: 300秒
+        ウォッチドッグタイマーで監視
+    end note
+
+    note right of REVIEWING
+        最大レビューループ: 3回
+        超過時はOAが強制終了
+    end note</code></pre>
+<hr />
+<h2 id="10">10. 非機能要件対応</h2>
+<h3 id="_8">パフォーマンス要件</h3>
+<table>
+<thead>
+<tr>
+<th>指標</th>
+<th>目標値</th>
+<th>計測方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>エージェント間メッセージ遅延</td>
+<td>&lt; 100ms（同期）</td>
+<td>APM（Datadog）</td>
+</tr>
+<tr>
+<td>非同期タスクキュー遅延</td>
+<td>&lt; 500ms（通常負荷時）</td>
+<td>RabbitMQ Management UI</td>
+</tr>
+<tr>
+<td>コンテキスト読み書き（Redis）</td>
+<td>&lt; 10ms</td>
+<td>Redis INFO stats</td>
+</tr>
+<tr>
+<td>タスク全体完了時間（標準）</td>
+<td>&lt; 30秒</td>
+<td>トレースID追跡</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_9">可観測性</h3>
+<pre class="mermaid"><code>graph LR
+    subgraph AGENTS["エージェント群"]
+        OA[OA] --&gt; SA[SA]
+        OA --&gt; CA[CA]
+    end
+
+    subgraph OBS["可観測性スタック"]
+        direction TB
+        TR[🔭 Jaeger&lt;br/&gt;分散トレーシング]
+        MT[📈 Prometheus&lt;br/&gt;メトリクス収集]
+        LG[📋 OpenSearch&lt;br/&gt;ログ集約]
+        AL[🚨 Alertmanager&lt;br/&gt;アラート]
+    end
+
+    AGENTS --&gt;|OpenTelemetry SDK| TR
+    AGENTS --&gt;|Prometheus Exporter| MT
+    AGENTS --&gt;|Fluent Bit| LG
+    MT --&gt; AL
+
+    style OBS fill:#f3e5f5,stroke:#6a1b9a</code></pre>
+<h4 id="_10">必須の計装ポイント</h4>
+<ul>
+<li><strong>分散トレース</strong>: 全エージェント呼び出しに <code>trace_id</code> / <code>span_id</code> を付与し、Jaegerで可視化</li>
+<li><strong>メトリクス</strong>: タスク成功率・失敗率・レイテンシをPrometheusで収集</li>
+<li><strong>ログ</strong>: 構造化ログ（JSON）で出力し、<code>correlation_id</code> で横断検索可能にする</li>
+</ul>
+<h3 id="_11">セキュリティ</h3>
+<table>
+<thead>
+<tr>
+<th>脅威</th>
+<th>対策</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>プロンプトインジェクション</td>
+<td>ユーザー入力のサニタイズ + Guardrailsによる出力検証</td>
+</tr>
+<tr>
+<td>エージェント間なりすまし</td>
+<td>内部認証トークン（JWT）による送信元検証</td>
+</tr>
+<tr>
+<td>機密情報の漏洩</td>
+<td>PII検出フィルター（Microsoft Presidio）をパイプラインに組み込み</td>
+</tr>
+<tr>
+<td>不正ツール呼び出し</td>
+<td>ツール実行権限をエージェントごとにRBACで制限</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<blockquote>
+<p><strong>📝 レビュー記録</strong> (<a href="./1.4.14_レビュー.md">1.4.14 レビュー</a> 参照)</p>
+<p><strong>📝 修正記録</strong> (<a href="./1.4.15_レビュー後修正.md">1.4.15 レビュー後修正</a> 参照)</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>
